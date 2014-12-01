@@ -105,6 +105,13 @@ var showSearchResultsTwo = function (query, resultNumTwo) {
     return resultsTwo;
 };
 
+// takes error string and turns it into displayable DOM element
+var showError = function (error) {
+    var errorElem = $('.templates .error').clone();
+    var errorText = '<p>' + error + '</p>';
+    errorElem.append(errorText);
+};
+
 // takes a string of semi-colon separated tags to be searched
 // for on StackOverflow from first question box
 var getUnanswered = function (tags) {
@@ -148,7 +155,7 @@ var getBestAnswerer = function (answerers) {
 
     // the parameters to pass in our request to StackOverflow's API
     var requestTwo = {
-        tag: answerers,
+        tags: answerers,
         site: 'stackoverflow',
         period: 'all_time',
 
@@ -156,7 +163,7 @@ var getBestAnswerer = function (answerers) {
 
     var resultTwo = $.ajax({
         url: "http://api.stackexchange.com/2.2/tags/{tag}/top-answerers/{period}",
-        data: request,
+        data: requestTwo,
         dataType: "jsonp",
         type: "GET",
     })
@@ -168,7 +175,7 @@ var getBestAnswerer = function (answerers) {
 
         $.each(resultTwo.items, function (i, item) {
             var questionTwo = showQuestionTwo(item);
-            $('.results').append(question);
+            $('.results').append(questionTwo);
         });
     })
 
