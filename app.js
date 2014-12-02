@@ -64,17 +64,17 @@ var showQuestionTwo = function (questionTwo) {
 
     // Set the link to best answerer properties in result
     var questionTwoElem = resultTwo.find('.topic-text a');
-    questionTwoElem.attr('href', questionTwo.link);
-    questionTwoElem.text(questionTwo.link);
+    questionTwoElem.attr('href', questionTwo.user.link);
+    questionTwoElem.text(questionTwo.user.link);
 
     // set the name of best answerer property in result
     var nameAns = resultTwo.find('.name-answerer');
-    nameAns.text(questionTwo.display_name);
+    nameAns.text(questionTwo.user.display_name);
 
 
     // set the reputation for question property in result
-    var repAns = resultTwo.find('.viewed');
-    repAns.text(questionTwo.reputation);
+    var repAns = resultTwo.find('.reputation');
+    repAns.text(questionTwo.user.reputation);
 
 
     return resultTwo;
