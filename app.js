@@ -57,27 +57,27 @@ var showQuestion = function (question) {
 
 // this function takes the answerer object returned by StackOverflow 
 // and creates new result to be appended to DOM
-var showQuestionTwo = function (tag_score) {
+var showQuestionTwo = function (questionTwo) {
 
     // clone our result template code
     var resultTwo = $('.templates .best-user').clone();
 
     // Set the link to best answerer properties in result
-    var questionTwoElem = result.find('.topic-text a');
+    var questionTwoElem = resultTwo.find('.topic-text a');
     questionTwoElem.attr('href', questionTwo.link);
     questionTwoElem.text(questionTwo.link);
 
     // set the name of best answerer property in result
-    var nameAns = result.find('.name-answerer');
+    var nameAns = resultTwo.find('.name-answerer');
     nameAns.text(questionTwo.display_name);
 
 
     // set the reputation for question property in result
-    var repAns = result.find('.viewed');
+    var repAns = resultTwo.find('.viewed');
     repAns.text(questionTwo.reputation);
 
 
-    return result;
+    return resultTwo;
 };
 
 
@@ -171,7 +171,7 @@ var getBestAnswerer = function (answerers) {
 
         .done(function (resultTwo) {
 
-       var searchResultsTwo = showSearchResultsTwo(requestTwo.tag, resultTwo.item.length);
+       var searchResultsTwo = showSearchResultsTwo(requestTwo.tag, resultTwo.items.length);
 
        $('.search-results').html(searchResultsTwo);
 
