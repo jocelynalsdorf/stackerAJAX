@@ -64,17 +64,17 @@ var showQuestionTwo = function (tag_score) {
 
     // Set the link to best answerer properties in result
     var questionTwoElem = result.find('.topic-text a');
-    questionTwoElem.attr('href', tag_score.link);
-    questionTwoElem.text(tag_score.link);
+    questionTwoElem.attr('href', questionTwo.link);
+    questionTwoElem.text(questionTwo.link);
 
     // set the name of best answerer property in result
     var nameAns = result.find('.name-answerer');
-    nameAns.text(tag_score.display_name);
+    nameAns.text(questionTwo.display_name);
 
 
     // set the reputation for question property in result
     var repAns = result.find('.viewed');
-    repAns.text(tag_score.reputation);
+    repAns.text(questionTwo.reputation);
 
 
     return result;
@@ -155,23 +155,25 @@ var getBestAnswerer = function (answerers) {
 
     // the parameters to pass in our request to StackOverflow's API
     var requestTwo = {
-        tags: answerers,
+        tag: answerers,
         site: 'stackoverflow',
-        period: 'all_time',
+        
+        
 
     };
 
     var resultTwo = $.ajax({
-        url: "http://api.stackexchange.com/2.2/tags/{tag}/top-answerers/{period}",
+        url: "http://api.stackexchange.com/2.2/tags/" + requestTwo.tag + "/top-answerers/all_time",
         data: requestTwo,
         dataType: "jsonp",
         type: "GET",
     })
 
         .done(function (resultTwo) {
-        var searchResultsTwo = showSearchResultsTwo(requestTwo.tag, resultTwo.items.length);
 
-        $('.search-results').html(searchResultsTwo);
+       var searchResultsTwo = showSearchResultsTwo(requestTwo.tag, resultTwo.item.length);
+
+       $('.search-results').html(searchResultsTwo);
 
         $.each(resultTwo.items, function (i, item) {
             var questionTwo = showQuestionTwo(item);
